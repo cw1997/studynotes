@@ -84,6 +84,29 @@ git status会在unmerged paths上报both modified：test.md
 
 > 通常合并分支时，git一般使用”Fast forward”模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数 –no-ff来禁用”Fast forward”模式。
 
+
+### Github上与他人协作开发项目和代码贡献
+引用自 https://segmentfault.com/q/1010000009818126
+
+#### 最佳实践
+应该是先确保自己仓库的代码已经提交了pull request到对方仓库，而且对方已经merged，之后没有再做其他改动了。那么这个时候可以直接删除我自己Github上的repo，然后重新从源仓库中fork一份来修改，这样是最保险的。**但是这种情况的局限性是：会丢失提交pull request之后所做的修改**
+
+#### 另一种实践
+> 首先 把别人的仓库添加到你的上游远程，通常命名为 upstream。操作一次就可以了。
+
+> git remote add upstream 原作者仓库地址
+此时再用 git remote -v 就可以看到一个origin是你的，另外一个upstream是原作者的。
+
+> 其次 更新代码
+
+> 使用git fetch upstream 拉去原作者的仓库更新。
+
+> 使用git checkout master 切换到自己的master
+
+> 使用 git merge upstream/master, merge或者rebase到你的master
+
+这种操作是不会丢失pull request之后的修改，而是与现有仓库合并，但是可能出现冲突情况，因为你无法保证你pull request之后的修改和别人在源仓库上的修改代码不会产生冲突。
+
 ### 最佳实践
 master分支应该是集成测试后的稳定版本分支，dev等分支才是主要干活的分支，而且干活的分支要每个模块一个，一般一个模块里面几个人自己再去协调自己模块分支合并。
 
