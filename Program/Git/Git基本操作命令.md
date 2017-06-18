@@ -94,18 +94,22 @@ git status会在unmerged paths上报both modified：test.md
 #### 另一种实践
 > 首先 把别人的仓库添加到你的上游远程，通常命名为 upstream。操作一次就可以了。
 
-> git remote add upstream 原作者仓库地址
-此时再用 git remote -v 就可以看到一个origin是你的，另外一个upstream是原作者的。
+> 
+```
+git remote add upstream  原作者仓库地址
+```
+
+> 此时再用 `git remote -v` 就可以看到一个origin是你的，另外一个upstream是原作者的。
 
 > 其次 更新代码
 
-> 使用git fetch upstream 拉去原作者的仓库更新。
+> 使用`git fetch upstream` 拉去原作者的仓库更新。
 
-> 使用git checkout master 切换到自己的master
+> 使用`git checkout master` 切换到自己的`master`
 
-> 使用 git merge upstream/master, merge或者rebase到你的master
+> 使用 `git merge upstream/master`, merge或者rebase到你的master
 
-这种操作是不会丢失pull request之后的修改，而是与现有仓库合并，但是可能出现冲突情况，因为你无法保证你pull request之后的修改和别人在源仓库上的修改代码不会产生冲突。
+这种操作是不会丢失pull request之后的修改，而是与现有仓库合并，**但是可能出现冲突情况，因为你无法保证你pull request之后的修改和别人在源仓库上的修改代码不会产生冲突。**
 
 ### 最佳实践
 master分支应该是集成测试后的稳定版本分支，dev等分支才是主要干活的分支，而且干活的分支要每个模块一个，一般一个模块里面几个人自己再去协调自己模块分支合并。
